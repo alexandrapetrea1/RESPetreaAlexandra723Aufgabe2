@@ -147,5 +147,23 @@ public class ShinobiController {
     }
 
 
+    /**
+     * Returns all characters who own at least one product from a specific region.
+     */
+    public List<Character> getCharactersByProductRegion(String originRegion) {
+        List<Character> filteredCharacters = new ArrayList<>();
+        for (Character character : characterRepo.getAll()) {
+            for (Product product : character.getProducts()) { // Verificăm produsele personajului, nu toate produsele din repo
+                if (product.getRegion().equalsIgnoreCase(originRegion)) {
+                    filteredCharacters.add(character);
+                    break;
+                }
+            }
+        }
+        return filteredCharacters;
+    }
+
+
+
 
 }

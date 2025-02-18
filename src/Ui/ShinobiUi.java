@@ -92,12 +92,27 @@ public class ShinobiUi {
                 case 5 -> getCharacterById();
                 case 7 -> addProductToCharacterUi();
                 case 8 -> filterCharactersByRegionUi();
-                //case 9 -> getCharactersByProductRegionUi();
+                case 9 -> getCharactersByProductRegionUi();
                 case 11 -> { return; }
                 default -> System.out.println("Invalid option. Try again.");
             }
         }
     }
+
+    private void getCharactersByProductRegionUi() {
+        System.out.print("Enter region name: ");
+        String region = scanner.nextLine();
+        List<Character> characters = controller.getCharactersByProductRegion(region);
+
+        if (characters.isEmpty()) {
+            System.out.println("No characters found.");
+        } else {
+            System.out.println("Characters who own products from " + region + ":");
+            characters.forEach(System.out::println);
+        }
+    }
+
+
 
 
     private void filterCharactersByRegionUi() {
