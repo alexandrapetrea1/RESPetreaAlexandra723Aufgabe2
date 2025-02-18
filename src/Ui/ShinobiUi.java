@@ -256,17 +256,23 @@ public class ShinobiUi {
         System.out.println("Enter Product Name: ");
         String name = scanner.nextLine();
         Product product = controller.getProductByName(name);
-        System.out.print("Enter new name: ");
-        String nume = scanner.nextLine();
+
+        if (product == null) {
+            System.out.println("Product not found.");
+            return;
+        }
+
         System.out.print("Enter new price: ");
         double price = scanner.nextDouble();
         scanner.nextLine();
         System.out.print("Enter new origin region: ");
         String originRegion = scanner.nextLine();
-
-        controller.updateProduct(new Product(nume, price, originRegion));
+        product.setPrice(price);
+        product.setRegion(originRegion);
+        controller.updateProduct(product);
         System.out.println("Product updated successfully.");
     }
+
 
     private void deleteProductUI() {
         System.out.print("Enter Product Name to delete: ");

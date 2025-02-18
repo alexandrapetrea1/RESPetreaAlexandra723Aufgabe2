@@ -160,6 +160,7 @@ public class ShinobiController {
                 }
             }
         }
+       filteredCharacters.sort(Comparator.comparing(Character::getName));
         return filteredCharacters;
     }
 
