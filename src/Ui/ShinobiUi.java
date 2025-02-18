@@ -46,7 +46,7 @@ public class ShinobiUi {
             System.out.println("3. Update Product");
             System.out.println("4. Delete Product");
             System.out.println("5. Get Product by Name");
-            //System.out.println("6. Sort Products for Character by Price");
+            System.out.println("6. Sort Products for Character by Price");
             System.out.println("9. Back");
             System.out.print("Choose an option: ");
 
@@ -59,7 +59,7 @@ public class ShinobiUi {
                 case 3 -> updateProductUI();
                 case 4 -> deleteProductUI();
                 case 5 -> getProductById();
-                //case 6 -> sortProductsFromCharacterUi();
+                case 6 -> sortProductsFromCharacterUi();
                 case 9 -> { return; }
                 default -> System.out.println("Invalid option. Try again.");
             }
@@ -96,6 +96,22 @@ public class ShinobiUi {
                 case 11 -> { return; }
                 default -> System.out.println("Invalid option. Try again.");
             }
+        }
+    }
+
+    private void sortProductsFromCharacterUi() {
+        System.out.print("Enter Character ID: ");
+        int characterId = scanner.nextInt();
+        scanner.nextLine();
+        System.out.print("Enter sorting order (asc/desc): ");
+        boolean ascending = scanner.nextLine().trim().equalsIgnoreCase("asc");
+
+        List<Product> sortedProducts = controller.getProductsByCharacterSorted(characterId, ascending);
+        if (sortedProducts.isEmpty()) {
+            System.out.println("No products found for this character.");
+        } else {
+            System.out.println("Sorted products for Character ID " + characterId + ":");
+            sortedProducts.forEach(System.out::println);
         }
     }
 

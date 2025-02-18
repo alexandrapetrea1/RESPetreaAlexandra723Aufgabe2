@@ -164,6 +164,23 @@ public class ShinobiController {
     }
 
 
+    /**
+     * Returns a character's products sorted by price.
+     */
+    public List<Product> getProductsByCharacterSorted(int characterId, boolean ascending) {
+        Character character = characterRepo.findByIdentifier(characterId);
+        if (character == null) {
+            System.out.println("Character not found.");
+            return new ArrayList<>();
+        }
+        List<Product> products = new ArrayList<>(character.getProducts());
+        products.sort(Comparator.comparingDouble(Product::getPrice));
+        if (!ascending) {
+            Collections.reverse(products);
+        }
+        return products;
+    }
+
 
 
 }
